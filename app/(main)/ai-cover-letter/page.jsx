@@ -3,6 +3,9 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CoverLetterList from "./_components/cover-letter-list";
+import { getUserOnboardingStatus } from "@/actions/user";
+import { redirect } from "next/navigation";
+
 
 export default async function CoverLetterPage() {
   const { isOnboarded } = await getUserOnboardingStatus();
