@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button";
 import CoverLetterList from "./_components/cover-letter-list";
 
 export default async function CoverLetterPage() {
+  const { isOnboarded } = await getUserOnboardingStatus();
+  if (!isOnboarded) {
+    redirect("/onboarding");
+  }
   const coverLetters = await getCoverLetters();
 
   return (

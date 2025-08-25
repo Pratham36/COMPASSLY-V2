@@ -4,6 +4,10 @@ import PerformanceChart from "./_components/performace-chart";
 import QuizList from "./_components/quiz-list";
 
 export default async function InterviewPrepPage() {
+    const { isOnboarded } = await getUserOnboardingStatus();
+    if (!isOnboarded) {
+      redirect("/onboarding");
+    }
   const assessments = await getAssessments();
 
   return (
