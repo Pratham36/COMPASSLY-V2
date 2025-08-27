@@ -23,6 +23,7 @@ model User {
   resume        Resume?
   coverLetter   CoverLetter[]
   resumeAnalysis ResumeAnalysis?
+  roadmaps         Roadmap[]
 }
 
 model Assessment {
@@ -38,6 +39,24 @@ model Assessment {
 
   @@index([userId])
 }
+
+model Roadmap {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id])
+  industry        String?
+  roadmapTitle String
+  description  String
+  duration     String?
+  initialNodes Json
+  initialEdges Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
 model ResumeAnalysis {
   id        String   @id @default(cuid())
   userId    String   @unique
@@ -98,28 +117,36 @@ model CoverLetter {
 // Combined Industry Trends and Salary Insights
 model IndustryInsight {
   id            String    @id @default(cuid())
-  industry      String    @unique  // The industry this data belongs to (e.g., "tech-software-development")
-  
+  industry      String    @unique  // e.g., "tech-software-development"
+
   // Users in this industry
   users         User[]
-  
+
   // Salary data
-  salaryRanges  Json[]    // Array of { role: string, min: float, max: float, median: float, location: string? }
-  
+  salaryRanges  Json[]    // [{ role: string, min: float, max: float, median: float, location?: string }]
+
   // Industry trends
   growthRate    Float     // Industry growth rate
   demandLevel   String    // "High", "Medium", "Low"
   topSkills     String[]  // Most in-demand skills
-  
+
   // Market conditions
   marketOutlook String    // "Positive", "Neutral", "Negative"
-  keyTrends     String[]  // Array of current industry trends
-  
-  // Learning suggestions
+  keyTrends     String[]  // Current industry trends
+
+  // Learning & career suggestions
   recommendedSkills String[]  // Skills recommended for the industry
-  
+  careerPath        Json[]    // [{ title: string, salary: number }]
+  certifications    String[]  // Recommended certifications
+  jobOpenings       Int
+  jobOpeningsChange Int
+      // % change in job openings
+  topRegions        Json[]    // [{ name: string, jobs: number }]
+  forecast          Json[]    // [{ year: string, growth: number }]
+
+  // Timestamps
   lastUpdated   DateTime  @default(now())
-  nextUpdate    DateTime  // Scheduled update time
+  nextUpdate    DateTime
 
   @@index([industry])
 }

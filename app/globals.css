@@ -156,3 +156,15 @@ body {
   @apply hidden sm:text-[8px] md:text-[8px] lg:text-[12px] xl:text-[15px] sm:inline;
 }
 
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;      /* allow wrapping */
+  gap: 0.5rem;          /* spacing between items */
+  max-width: 100%;      /* prevent overflow */
+}
+
+.skill-tag {
+  padding: 0.4rem 0.8rem;
+  white-space: normal;   /* allow multi-line */
+  word-break: break-word; /* break long text */
+}

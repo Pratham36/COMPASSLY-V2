@@ -6,7 +6,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from './ui/button'
-import { FileUser, GraduationCap, LayoutDashboard, Menu, PenBox, ScanText } from 'lucide-react'
+import { GraduationCap, LayoutDashboard, Menu, PenBox, Route, ScanText } from 'lucide-react'
 import { checkUser } from '@/lib/checkUser'
 
 export default async function Header() {
@@ -40,7 +40,7 @@ export default async function Header() {
               <DropdownMenuContent>
                 <DropdownMenuItem asChild>
                   <Link href="/resume" className="flex items-center gap-2">
-                    <ScanText  className="h-4 w-4" />
+                    <ScanText className="h-4 w-4" />
                     <span className="md:block">Resume Analysis</span>
                   </Link>
                 </DropdownMenuItem>
@@ -56,6 +56,13 @@ export default async function Header() {
                   <Link href="/interview" className="flex items-center gap-2">
                     <GraduationCap className="h-4 w-4" />
                     <span className="md:block">Interview Prep</span>
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem asChild>
+                  <Link href="/roadmap" className="flex items-center gap-2">
+                    <Route className="h-4 w-4" />
+                    <span className="md:block">Roadmap</span>
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>

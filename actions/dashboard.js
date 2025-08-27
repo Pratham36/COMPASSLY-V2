@@ -27,7 +27,13 @@ export const generateAIInsights = async (resumeData) => {
       "topSkills": ["skill1", "skill2"],
       "marketOutlook": "Positive" | "Neutral" | "Negative",
       "keyTrends": ["trend1", "trend2"],
-      "recommendedSkills": ["skill1", "skill2"]
+      "recommendedSkills": ["skill1", "skill2"],
+      "jobOpenings": number,
+      "jobOpeningsChange": number,
+      "topRegions": [{"name":"string","jobs":number}],
+      "careerPath": [{"title":"string","salary":number}],
+      "certifications": ["string"],
+      "forecast": [{"year":"string","growth":number}]
     }
 
     RULES:
@@ -37,12 +43,36 @@ export const generateAIInsights = async (resumeData) => {
     - Include at least 5 skills and 5 trends.
   `;
 
-  const result = await model.generateContent(prompt);
-  const response = result.response;
-  const text = response.text();
-  const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
+  try {
+    const result = await model.generateContent(prompt);
+    const text = result.response.text();
+    const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
 
-  return JSON.parse(cleanedText);
+    if (!cleanedText) {
+      throw new Error("AI returned empty response");
+    }
+
+    return JSON.parse(cleanedText);
+  } catch (err) {
+    console.error("Failed to parse AI response:", err);
+    // Return a default/fallback object to prevent dashboard crash
+    return {
+      industry: "Information Technology",
+      salaryRanges: [],
+      growthRate: 0,
+      demandLevel: "Medium",
+      topSkills: [],
+      marketOutlook: "Neutral",
+      keyTrends: [],
+      recommendedSkills: [],
+      jobOpenings: 0,
+      jobOpeningsChange: 0,
+      topRegions: [],
+      careerPath: [],
+      certifications: [],
+      forecast: [],
+    };
+  }
 };
 
 /**
@@ -54,10 +84,7 @@ export async function getIndustryInsights() {
 
   const user = await db.user.findUnique({
     where: { clerkUserId: userId },
-    include: {
-      resume: true,
-      industryInsight: true,
-    },
+    include: { resume: true, industryInsight: true },
   });
 
   if (!user) throw new Error("User not found");
@@ -65,28 +92,25 @@ export async function getIndustryInsights() {
 
   const now = new Date();
 
-  // ✅ If no insights yet OR past refresh date → regenerate
-  if (
-    !user.industryInsight ||
-    new Date(user.industryInsight.nextUpdate) < now
-  ) {
+  // ✅ Regenerate if no insights or past refresh
+  if (!user.industryInsight || new Date(user.industryInsight.nextUpdate) < now) {
     const insights = await generateAIInsights(user.resume);
 
     let industryInsight;
 
     if (user.industryInsight) {
-      // ✅ Update existing record
+      // Update existing record
       industryInsight = await db.industryInsight.update({
         where: { id: user.industryInsight.id },
         data: {
-          industry: insights.industry,
           ...insights,
-          nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // refresh in 7 days
+          nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+          lastUpdated: new Date(),
         },
       });
     } else {
-      // ✅ Create and link to user
-      industryInsight = await db.industryInsight.create({
+      // Create new record
+       industryInsight = await db.industryInsight.create({
         data: {
           industry: insights.industry,
           ...insights,
@@ -101,6 +125,5 @@ export async function getIndustryInsights() {
     return industryInsight;
   }
 
-  // ✅ Return existing insights if still valid
   return user.industryInsight;
 }
