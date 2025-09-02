@@ -55,7 +55,6 @@ export const generateAIInsights = async (resumeData) => {
     return JSON.parse(cleanedText);
   } catch (err) {
     console.error("Failed to parse AI response:", err);
-    // Return a default/fallback object to prevent dashboard crash
     return {
       industry: "Information Technology",
       salaryRanges: [],
@@ -75,9 +74,6 @@ export const generateAIInsights = async (resumeData) => {
   }
 };
 
-/**
- * Get or generate industry insights for logged-in user
- */
 export async function getIndustryInsights() {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
@@ -92,32 +88,31 @@ export async function getIndustryInsights() {
 
   const now = new Date();
 
-  // ✅ Regenerate if no insights or past refresh
   if (!user.industryInsight || new Date(user.industryInsight.nextUpdate) < now) {
     const insights = await generateAIInsights(user.resume);
 
-    let industryInsight;
-
-    if (user.industryInsight) {
-      // Update existing record
-      industryInsight = await db.industryInsight.update({
-        where: { id: user.industryInsight.id },
-        data: {
-          ...insights,
-          nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-          lastUpdated: new Date(),
+    const industryInsight = await db.industryInsight.upsert({
+      where: { industry: insights.industry },
+      update: {
+        ...insights,
+        nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        lastUpdated: new Date(),
+      },
+      create: {
+        industry: insights.industry,
+        ...insights,
+        nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        users: {
+          connect: { id: user.id },
         },
-      });
-    } else {
-      // Create new record
-       industryInsight = await db.industryInsight.create({
+      },
+    });
+
+    if (!user.industryInsight) {
+      await db.user.update({
+        where: { id: user.id },
         data: {
-          industry: insights.industry,
-          ...insights,
-          nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-          users: {
-            connect: { id: user.id },
-          },
+          industryInsight: { connect: { id: industryInsight.id } },
         },
       });
     }

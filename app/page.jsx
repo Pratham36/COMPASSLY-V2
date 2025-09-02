@@ -24,7 +24,7 @@ export default function LandingPage() {
       <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl font-bold tracking-tighter text-center mb-12">
-            Powerful Features for Your Career Growth
+            AI-Powered Features, Designed for Your Growth
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {features.map((feature, index) => (
@@ -52,15 +52,15 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
             <div className="flex flex-col items-center justify-center space-y-2">
-              <h3 className="text-4xl font-bold">50+</h3>
+              <h3 className="text-4xl font-bold">60+</h3>
               <p className="text-muted-foreground">Industries Covered</p>
             </div>
             <div className="flex flex-col items-center justify-center space-y-2">
-              <h3 className="text-4xl font-bold">1000+</h3>
+              <h3 className="text-4xl font-bold">2000+</h3>
               <p className="text-muted-foreground">Interview Questions</p>
             </div>
             <div className="flex flex-col items-center justify-center space-y-2">
-              <h3 className="text-4xl font-bold">95%</h3>
+              <h3 className="text-4xl font-bold">90%</h3>
               <p className="text-muted-foreground">Success Rate</p>
             </div>
             <div className="flex flex-col items-center justify-center space-y-2">
@@ -101,8 +101,7 @@ export default function LandingPage() {
       <section className="w-full py-12 md:py-24 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6">
           <h2 className="text-3xl font-bold text-center mb-12">
-            What Our Users Say
-          </h2>
+            Voices of Our Community          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {testimonial.map((testimonial, index) => (
               <Card key={index} className="bg-background">
@@ -152,10 +151,10 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="text-3xl font-bold mb-4">
-              Frequently Asked Questions
+              Your Questions, Answered
             </h2>
             <p className="text-muted-foreground">
-              Find answers to common questions about our platform
+              Explore straightforward answers to the most common questions about our platform
             </p>
           </div>
 
@@ -179,11 +178,10 @@ export default function LandingPage() {
         <div className="mx-auto py-24 gradient rounded-lg">
           <div className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter text-primary-foreground sm:text-4xl md:text-5xl">
-              Ready to Accelerate Your Career?
+              Take the Next Step Toward Your Future
             </h2>
             <p className="mx-auto max-w-[600px] text-primary-foreground/80 md:text-xl">
-              Join thousands of professionals who are advancing their careers
-              with AI-powered guidance.
+              Thousands of professionals are already accelerating their careers with AI — now it’s your turn
             </p>
             <Link href="/dashboard" passHref>
               <Button
@@ -191,7 +189,7 @@ export default function LandingPage() {
                 variant="secondary"
                 className="h-11 mt-5 animate-bounce"
               >
-                Start Your Journey Today <ArrowRight className="ml-2 h-4 w-4" />
+                Smarter Careers Start Here <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>

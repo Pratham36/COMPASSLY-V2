@@ -2,31 +2,31 @@ export const faqs = [
   {
     question: "What makes Compassly unique as a career development tool?",
     answer:
-      "Compassly combines AI-powered career tools with industry-specific insights to help you advance your career. Our platform offers three main features: an intelligent resume builder, a cover letter generator, and an adaptive interview preparation system. Each tool is tailored to your industry and skills, providing personalized guidance for your professional journey.",
+      "Compassly combines AI-powered tools with real-time industry insights to accelerate your career growth. The platform offers four core features: intelligent resume analysis, a cover letter generator, adaptive interview preparation, and a career roadmap builder. Each tool is personalized to your skills and industry, ensuring guidance that’s both relevant and impactful.",
   },
   {
     question: "How does Compassly create tailored content?",
     answer:
-      "Compassly learns about your industry, experience, and skills during onboarding. It then uses this information to generate customized resumes, cover letters, and interview questions. The content is specifically aligned with your professional background and industry standards, making it highly relevant and effective.",
+      "During onboarding, Compassly learns about your resume, experience, and skills. Using this information, it generates personalized cover letters, resume analysis, and role-specific interview questions. The content is aligned with your professional background and industry standards, making it highly relevant and effective.",
   },
   {
     question: "How accurate and up-to-date are Compassly's industry insights?",
     answer:
-      "We update our industry insights weekly using advanced AI analysis of current market trends. This includes salary data, in-demand skills, and industry growth patterns. Our system constantly evolves to ensure you have the most relevant information for your career decisions.",
+      "Our industry insights are updated weekly using advanced AI analysis of current market trends. This includes salary benchmarks, in-demand skills, and growth forecasts. The system constantly evolves to provide the most reliable and timely data for your career decisions.",
   },
   {
     question: "Is my data secure with Compassly?",
     answer:
-      "Absolutely. We prioritize the security of your professional information. All data is encrypted and securely stored using industry-standard practices. We use Clerk for authentication and never share your personal information with third parties.",
+      "Yes. Data security is a top priority. All professional information is encrypted and stored using industry-standard practices. We use Clerk for authentication and never share your personal data with third parties.",
   },
   {
     question: "How can I track my interview preparation progress?",
     answer:
-      "Compassly tracks your performance across multiple practice interviews, providing detailed analytics and improvement suggestions. You can view your progress over time, identify areas for improvement, and receive AI-generated tips to enhance your interview skills based on your responses.",
+      "Compassly monitors your performance across multiple practice interviews, offering detailed analytics and personalized suggestions. You can track improvements over time, identify weak spots, and get AI-powered tips to strengthen your responses.",
   },
   {
     question: "Can I edit the AI-generated content?",
     answer:
-      "Yes! While Compassly generates high-quality initial content, you have full control to edit and customize all generated resumes, cover letters, and other content. Our markdown editor makes it easy to refine the content to perfectly match your needs.",
+      "Absolutely. While Compassly provides high-quality drafts, you have full control to edit and refine all generated cover letters and other documents. Our intuitive editor makes customization simple, so your materials perfectly match your voice and goals.",
   },
 ];

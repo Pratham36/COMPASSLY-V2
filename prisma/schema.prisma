@@ -17,7 +17,7 @@ model User {
   industryInsight IndustryInsight? @relation(fields: [industry], references: [industry])
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
- isUploaded    Boolean   @default(false)
+  isUploaded    Boolean   @default(false)
 
   assessments   Assessment[]
   resume        Resume?

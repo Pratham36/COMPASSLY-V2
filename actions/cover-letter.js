@@ -19,7 +19,6 @@ export async function generateCoverLetter(data) {
   if (!user) throw new Error("User not found");
   if (!user.resume) throw new Error("Resume not uploaded");
 
-  // Parse resume JSON
   const resume = JSON.parse(user.resume.content);
 
 const prompt = `

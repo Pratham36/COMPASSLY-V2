@@ -11,7 +11,6 @@ export default async function ResumePage() {
   }
 
   const roadmap = await saveRoadMap();
-{console.log("📌 Fetched roadmap:", roadmap);}
   return (
     <div className="container mx-auto">
     <CareerRoadmap roadmap={roadmap} />

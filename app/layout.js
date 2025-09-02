@@ -28,8 +28,8 @@ export default async function RootLayout({ children }) {
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
-            enableSystem={false} 
-            
+            enableSystem={false}
+
           >
             {/* Header */}
             <Header />
@@ -41,8 +41,7 @@ export default async function RootLayout({ children }) {
             <footer className="bg-muted">
               <div className="container mx-auto py-4 text-center text-gray-200">
                 <p>
-                  © Compassly. All rights reserved. Made with ❤️ by Pratham
-                </p>
+                  © 2025 Compassly. All rights reserved. Designed and developed by Pratham.                </p>
               </div>
             </footer>
 
